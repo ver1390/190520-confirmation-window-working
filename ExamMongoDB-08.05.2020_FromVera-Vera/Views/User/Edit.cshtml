@@ -1,0 +1,164 @@
+﻿
+@inject UserManager<Student> _userManager;
+@using ExamMongoDB.Identity
+@using Microsoft.AspNetCore.Identity
+@using ExamMongoDB.Models.Repositories;
+@using ExamMongoDB.ViewModels;
+@model ExamMongoDB.ViewModels.UserMyRoleViewModel
+@*Edited by Tareq*@
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<link href="~/css/admin_logged_in.css" rel="stylesheet" type="text/css" />
+
+<h2>    Edit User</h2>
+
+<section>
+    <div class="row">
+        <div class="col-md-4">
+            <section>
+                <form id="edituser" asp-action="Edit" style="padding-right:50px;">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label"></label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Fname" class="control-label"></label>
+                        <input asp-for="Fname" class="form-control" />
+                        <span asp-validation-for="Fname" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Lname" class="control-label"></label>
+                        <input asp-for="Lname" class="form-control" />
+                        <span asp-validation-for="Lname" class="text-danger"></span>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"> </label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+
+                    @*<div class="form-group">
+                        <label asp-for="ProgrammeCode" class="control-label"></label>
+                        <input asp-for="ProgrammeCode" class="form-control" />
+                        <span asp-validation-for="ProgrammeCode" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ProgrammeName" class="control-label"></label>
+                        <input asp-for="ProgrammeName" class="form-control" />
+                        <span asp-validation-for="ProgrammeName" class="text-danger"></span>
+                    </div>*@
+
+                <div class="form-group">
+
+                    <label asp-for="ProgrammeCode" class="control-label"></label>
+                    <select asp-for="ProgrammeCode" class="form-control" name="ProgrammeCode"
+                            asp-items="@(new SelectList(Model.Programmes, "ProgrammeCode", "ProgrammeName"))"></select>
+                    <span asp-validation-for="ProgrammeCode" class="text-danger"></span>
+                </div>
+                   
+
+                    <input type="hidden" value="@Model.Id" name="Id" />
+                    <input type="hidden" value="@Model.PasswordHash" name="PasswordHash" />
+                    @*<input type="hidden" value="@Model.AuthenticatorKey" name="AuthenticatorKey" />*@
+                    <input type="hidden" value="@Model.NormalizedEmail" name="NormalizedEmail" />
+                    <input type="hidden" value="@Model.NormalizedUserName" name="NormalizedUserName" />
+                    <input type="hidden" value="@Model.UserName" name="UserName" />
+                    <input type="hidden" value="@Model.Email" name="Email" />
+                    <input type="hidden" value="@Model.Fname" name="Fname" />
+                    <input type="hidden" value="@Model.Lname" name="Lname" />
+                    <input type="hidden" value="@Model.PhoneNumber" name="PhoneNumber" />
+                    @*<input type="hidden" value="@Model.SecurityStamp" name="SecurityStamp" />*@
+                    @*<input type="hidden" value="@Model.MyRoles" name="MyRoles" />*@
+                    @*<input type="hidden" value="@Model.ExamEnrollment" name="ExamEnrollment" />*@
+                    @*<input type="hidden" value="@Model.Programmes" name="Programmes" />*@
+                    @*<input type="hidden" value="@Model.ProgrammeName" name="ProgrammeName" />*@
+
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <a asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row">
+                <section>
+                    <form method="post" action="/user/addToRole" style="padding-right:100px;">
+                        <label>Select Role Name</label>
+                        <input type="hidden" name="userName" value="@Model.UserName" />
+
+
+
+                        @*<div class="form-group">
+                            <input type="text" name="roleName" class="form-control" placeholder="Example: student, admin.." />
+                        </div>*@
+
+                        <div class="form-group">                          
+                            <select asp-for="MyRoleId" class="form-control" name="roleName"
+                                    asp-items="@(new SelectList(Model.MyRoles,"MyRoleName", "MyRoleId" ))"></select>
+                            <span asp-validation-for="MyRoleId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Add to role" />
+                        </div>
+                    </form>
+                </section>
+
+
+                <section>
+                    <h3>User roles</h3>
+                    @{
+                        var dbUser = await _userManager.FindByIdAsync(Model.Id);
+                        var roles = await _userManager.GetRolesAsync(dbUser);
+                    }
+                    <ul>
+                        @foreach (var role in roles)
+                        {
+                            <li>@role</li>
+                        }
+                    </ul>
+                </section>
+            </div>
+          
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

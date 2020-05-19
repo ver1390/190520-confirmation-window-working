@@ -1,0 +1,301 @@
+﻿@inject UserManager<Student> _userManager;
+@using ExamMongoDB.Identity
+@using Microsoft.AspNetCore.Identity
+@using ExamMongoDB.Models.Repositories;
+
+@model IEnumerable<ExamMongoDB.Identity.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/admin_logged_in.css" />
+<div class="text-center mb-5">
+
+    <h2>Edit Marks</h2>
+</div>
+
+
+<div class="card mb-3" style="max-width: 720px;">
+    <div class="row " style="margin-left:10px;">
+        <div class="col-md-4 card-body">
+            <h5 class="card-title">Username</h5>
+            <h6 class="card-subtitle mb-2 text-muted">SAMPLE DATA ONLY </h6>
+
+            <h5 class="card-title">Program Code</h5>
+            <h6 class="card-subtitle mb-2 text-muted">ITIS</h6>
+
+            <h5 class="card-title">Programme Name</h5>
+            <h6 class="card-subtitle mb-2 text-muted">IT og Informasjonssystemer</h6>
+
+            <h5 class="card-text">Exams enrolled to</h5>
+            <h6 class="card-subtitle mb-2 text-muted">3</h6>
+
+            <a href="#" class="btn btn-primary" id="ee">This button doesn't work</a>
+
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Exam Date</th>
+                            <th>Room Id</th>
+                            <th>Mark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>May 1, 2020</td>
+                            <td>A2-B2</td>
+                            <td>A</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>May 18, 2020</td>
+                            <td>C2-B2</td>
+                            <td>A</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>May 30, 2020</td>
+                            <td>C2-B2</td>
+                            <td>A</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>May 30, 2020</td>
+                            <td>C2-B2</td>
+                            <td>A</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>May 30, 2020</td>
+                            <td>C2-B2</td>
+                            <td>A</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>May 30, 2020</td>
+                            <td>C2-B2</td>
+                            <td>A</td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@foreach (var item in Model)
+{
+
+
+    <div class="card mb-3" style="max-width: 720px;">
+        <div class="row " style="margin-left:10px;">
+            <div class="col-md-4 card-body">
+                <h5 class="card-title">Username</h5>
+                <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayFor(modelItem => item.UserName)</h6>
+
+                <h5 class="card-title">Program Code</h5>
+                <h6 class="card-subtitle mb-2 text-muted">  @Html.DisplayFor(modelItem => item.Programmes.ProgrammeCode)</h6>
+
+                <h5 class="card-title">Programme Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayFor(modelItem => item.Programmes.ProgrammeName)</h6>
+
+                <h5 class="card-text">Exams enrolled to:</h5>
+                <h6 class="card-subtitle mb-2 text-muted">  @item.ExamEnrollment.ToArray().Length</h6>
+
+                <a href="/EnrollmentSensor/Edit/@item.UserName" class="btn btn-primary btn-outline-primary" id="ee">Edit Enrollment</a>
+
+
+            </div>
+
+       
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Subject Code</th>
+                                    <th>Room Id</th>
+                                    <th>Mark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < @item.ExamEnrollment.ToArray().Length; i++)
+                                {
+                                <tr>
+                                    @*<td>@Html.DisplayFor(modelItem => item.ExamEnrollment[i].ExamDate)</td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.ExamEnrollment[i].SubjectCode)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ExamEnrollment[i].RoomId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ExamEnrollment[i].Mark)</td>
+
+                                </tr>
+                                }
+
+                                </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+
+            
+
+            </div>
+    </div>
+
+}
+
+
+@*<p>This should be deleted</p>*@
+
+@*<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home">Users</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="home" role="tabpanel">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                                <th>
+                                    UserName
+                                </th>
+                                <th>
+                                  ProgrammeCode
+                                </th>
+                                <th>
+                       ProgrammeName
+                    </th>
+                            </tr>
+            </thead>
+
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(modelItem => item.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(modelItem => item.Programmes.ProgrammeCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(modelItem => item.Programmes.ProgrammeName)
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Programmes.ProgrammeCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Programmes.ProgrammeName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th>
+                            ExamDate
+                        </th>
+                        <th>
+                            RoomId
+                        </th>
+                        <th>
+                            Mark
+                        </th>
+                        <th>
+                                Enrolled
+                            </th>
+                        <th>
+                            No. of exams enrolled to:
+                            @item.ExamEnrollment.ToArray().Length <br />
+
+                        </th>
+                        <th>
+                            <a href="/EnrollmentSensor/Edit/@item.UserName" class="btn btn-sm btn-outline-primary">Edit Enrollment</a>
+                        </th>
+                    </tr>
+
+
+                    @for (int i = 0; i < @item.ExamEnrollment.ToArray().Length; i++)
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ExamEnrollment[i].ExamDate) <br />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ExamEnrollment[i].RoomId) <br />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ExamEnrollment[i].Mark) <br />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ExamEnrollment[i].Enrolled) <br />
+                            </td>
+                        </tr>
+
+
+                    }
+
+
+                }
+            </tbody>
+
+
+        </table>
+    </div>
+</div>*@
+
+
+
+

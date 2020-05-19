@@ -1,0 +1,32 @@
+﻿h2 {
+    text-align: left;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight:bold;
+}
+
+body {
+    /*background-image: url(https://images.unsplash.com/photo-1521080755838-d2311117f767?ixlib=rb-1.2.1&auto=format&fit=crop&w=1429&q=80);*/
+    background-image: url(https://images.pexels.com/photos/1029614/pexels-photo-1029614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+table {
+    padding-bottom: 50px;
+    /*background-color:lightgray ;*/
+    text-align:left;
+}
+
+#editprofile{
+    padding-top:10px;
+}
+
+#savechanges {
+    margin-top:3em;
+}
+
+#updatepassword {
+    margin-top: 3em;
+}

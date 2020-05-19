@@ -1,0 +1,19 @@
+﻿@using ExamMongoDB.Identity
+@using ExamMongoDB.Views.Manage
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Student> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+    <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+
+<ul id="profilenav" class="nav nav-pills flex-column">
+
+    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><span><a asp-action="Index" class="btn btn-outline-info">Edit your Profile</a></span></li>
+    </ br>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><span><a asp-action="ChangePassword" class="btn btn-outline-info">Change Password</a></span></li>
+
+
+</ul>
+

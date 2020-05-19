@@ -1,0 +1,13 @@
+﻿@model string
+
+@if (!String.IsNullOrEmpty(Model))
+{
+   //Your exam is registered. Appears when exam is successfully registered and when the exam has already been previously registered.
+    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
+    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       
+        @Model
+
+    </div>
+}

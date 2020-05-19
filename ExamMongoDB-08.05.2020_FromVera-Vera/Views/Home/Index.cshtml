@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*Home Page after user has logged in. Welcome Page. Insert XML animation here*@
+
+    <style>
+        body {
+            background-image: url(https://images.unsplash.com/photo-1521080755838-d2311117f767?ixlib=rb-1.2.1&auto=format&fit=crop&w=1429&q=80);
+            background-image: url(https://images.pexels.com/photos/1029614/pexels-photo-1029614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+    </style>
+
+@*put the xml intro animation here instead of the picture????*@
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h2>@User.Identity.Name</h2>
+</div>
+
+<div class="text-center">
+    <img src="~/images/exam1.jpg" style='height: 50%; width: 50%; object-fit: contain' />
+   
+</div>
+

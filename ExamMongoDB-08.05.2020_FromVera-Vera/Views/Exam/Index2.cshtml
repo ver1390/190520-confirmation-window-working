@@ -1,0 +1,74 @@
+﻿@model ExamViewModel
+@using ExamMongoDB.Views.Manage
+
+
+@using ExamMongoDB.Identity
+@using Microsoft.AspNetCore.Identity
+@using ExamMongoDB.Models.Repositories
+@inject UserManager<Student> _userManager
+@inject SignInManager<Student> _signInManager
+
+    <link rel="stylesheet" href="~/css/admin_logged_in.css" />
+
+    <h2>List of All Exams Admin View</h2>
+@if (@User.Identity.IsAuthenticated == true)
+{
+
+<br />
+    <table id="adminExamTable"class="table table-bordered table-striped">
+        <thead class="thead-dark text-center" >
+            <tr>
+                @*<th>SubjectCode</th>*@
+                <th class="text-left">Subject Name</th>
+                <th>Programme</th>
+                <th>Exam Date</th>
+                <th>Subject Code</th>
+               
+                @*@_userManager.Users*@
+                Since you are logged in as      @User.Identity.Name, you have access to the list of all the exams in all the different programmes.
+
+                @*@User.Identity.IsAuthenticated*@
+
+            </tr>
+
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Exams)
+            {
+
+            <tr>
+                @*<td class="text-center">@item.ExamId</td>*@
+                <td class="text-left">@item.SubjectName</td>
+                <td class="text-center">@item.ProgrammeCode</td>
+                <td class="text-center">@item.ExamDate</td>
+                <td class="text-center">
+                    @item.idExam
+
+                                @*@Html.AntiForgeryToken()
+                                <input type="hidden" name="idExam" value="@item.idExam" />
+                                <input type="hidden" name="SubjectName" value="@item.SubjectName" />
+                                <input type="hidden" name="ExamDate" value="@item.ExamDate" />
+                                <input type="hidden" name="ProgrammeCode" value="@item.ProgrammeCode" />
+                                <input type="hidden" name="userName" value="@_userManager.GetUserId(User)" />*@
+
+                            </td>
+              
+
+                       
+
+                      
+
+
+            </tr>
+            }
+
+        </tbody>
+    </table>
+
+}
+else
+{
+    <p>You are not logged in</p>
+}
+

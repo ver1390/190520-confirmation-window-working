@@ -1,0 +1,56 @@
+@using ExamMongoDB.Identity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Student> SignInManager
+@inject UserManager<Student> UserManager
+
+    <ul class="navbar-nav ">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var user = await UserManager.FindByNameAsync(User.Identity.Name.ToString());
+            if (user.ToString() == "Admin")
+            {
+                <li class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_Authenticated_Admin_LoginPartial" />
+                </li>
+            }
+            else if (user.ToString() == "Sensor")
+            {
+                <li class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_Authenticated_Sensor_LoginPartial" />
+                </li>
+            }
+            else
+            {
+                <li class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_Authenticated_Student_LoginPartial" />
+                </li>
+            }
+
+            <li class="nav-item">
+                <a class="btn btn-outline-info" href="/Manage/Index" title="Edit Your Profile">My Profile @User.Identity.Name </a>
+            </li>
+            <li class="nav-item" &nbsp;&nbsp;>
+                <form method="post" class="form-inline" action="/Account/Logout">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-outline-info"> Logout</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item  ">
+                <a asp-active-route class="btn btn-outline-info " href="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item ">
+                <a asp-active-route class="btn btn-outline-info " href="/Account/Login">Login</a>
+            </li>
+
+
+        }
+
+        
+
+        
+      
+
+    </ul>

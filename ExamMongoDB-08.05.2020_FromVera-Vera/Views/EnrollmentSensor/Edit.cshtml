@@ -1,0 +1,172 @@
+﻿
+@inject UserManager<Student> _userManager;
+@using ExamMongoDB.Identity
+@using Microsoft.AspNetCore.Identity
+@using ExamMongoDB.Models.Repositories;
+@*@model ExamMongoDB.Identity.Student*@
+@model ExamMongoDB.ViewModels.StudentExamEnrollmentArrayViewModel
+
+
+@{
+    ViewData["Title"] = "Edit_Admin";
+}
+
+
+<link rel="stylesheet" href="~/css/admin_logged_in.css" />
+
+@foreach (var item in _userManager.Users.LastOrDefault().ExamEnrollment.AsEnumerable())
+{
+<div class="col-md">
+    
+
+    <label asp-for="@item.SubjectCode" class="control-label"></label>
+    <input readonly asp-for="@item.SubjectCode" class="form-control" />
+
+    @*<label asp-for="ExamEnrollment[i].SubjectName" class="control-label"></label>
+        <input readonly asp-for="ExamEnrollment[i].SubjectName" class="form-control" />
+
+        <label asp-for="ExamEnrollment[i].ExamDate" class="control-label"></label>
+        <input asp-for="ExamEnrollment[i].ExamDate" class="form-control" />*@
+
+    <label asp-for="@item.RoomId" class="control-label"></label>
+    <input asp-for="@item.RoomId" class="form-control" />
+
+    <label asp-for="@item.Mark" class="control-label"></label>
+    <input asp-for="@item.Mark" class="form-control" />
+
+    @*<label asp-for="ExamEnrollment[i].Enrolled" class="control-label"></label>
+        <input type="checkbox" asp-for="ExamEnrollment[i].Enrolled" class="form-control" />*@
+</div>
+
+
+
+
+    <tr>
+        @*<td class="text-center">@item.ExamId</td>*@
+        <td class="text-center">@item.SubjectCode</td>
+        <td class="text-center">@item.RoomId</td>
+        <td class="text-center">@item.Mark</td>
+
+        <td>
+            <form method="post" action="/exam/enroll">
+                @Html.AntiForgeryToken()
+                @*<input type="hidden" name="SubjectCode" value="@item.SubjectCode" />
+                <input type="hidden" name="RoomId" value="@item.RoomId" />
+                <input type="hidden" name="Mark" value="@item.Mark" />*@
+                @*<input type="hidden" name="userName" value="@_userManager.Users.LastOrDefault().UserName" />
+
+                <input type="hidden" name="userName" value="@_userManager.GetUserId(User)" />*@
+            </form>
+        </td>
+        @*<td class="text-center">@_userManager.Users.FirstOrDefault().UserName" <td>
+        <td class="text-center">Secound line @_userManager.GetUserId(User)</td>
+        <td class="text-center">What is this @item.Id</td>*@
+
+
+           
+       
+
+    </tr>
+}
+
+
+
+
+
+
+<section>
+    <div class="container-fluid " id="edit_user_div">
+        <div class="col-xl-12">
+            <section>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    @*<div class="form-group">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input readonly asp-for="UserName" class="form-control w-25" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>*@
+                    @*<div class="form-group">
+                            <label asp-for="Programmes.ProgrammeCode" class="control-label"></label>
+                            <input asp-for="Programmes.ProgrammeCode" class="form-control" />
+                            <span asp-validation-for="Programmes.ProgrammeCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Programmes.ProgrammeName" class="control-label"></label>
+                            <input  asp-for="Programmes.ProgrammeName" class="form-control" />
+                            <span asp-validation-for="Programmes.ProgrammeName" class="text-danger"></span>
+                        </div>*@
+
+                    @*//////////*@
+
+
+                    @*////////////////////////////////*@
+
+
+
+                    <div class="row">
+                        @*/////////////////////////////////////*@
+                        @foreach (var item in _userManager.Users.LastOrDefault().ExamEnrollment.ToArray().AsEnumerable())
+
+                        {
+                            @*<div class="col-md">
+
+                                <label asp-for="SubjectCode" class="control-label"></label>
+                                <input readonly asp-for="SubjectCode" class="form-control" />
+
+                                <label asp-for="ExamEnrollment[i].SubjectName" class="control-label"></label>
+                                    <input readonly asp-for="ExamEnrollment[i].SubjectName" class="form-control" />
+
+                                    <label asp-for="ExamEnrollment[i].ExamDate" class="control-label"></label>
+                                    <input asp-for="ExamEnrollment[i].ExamDate" class="form-control" />
+
+                                <label asp-for="RoomId" class="control-label"></label>
+                                <input asp-for="RoomId" class="form-control" />
+
+                                <label asp-for="Mark" class="control-label"></label>
+                                <input asp-for="Mark" class="form-control" />
+
+                                <label asp-for="ExamEnrollment[i].Enrolled" class="control-label"></label>
+                                    <input type="checkbox" asp-for="ExamEnrollment[i].Enrolled" class="form-control" />
+                            </div>*@
+                        }
+                    </div>
+                    @*<input type="hidden" value="@Model.Id" name="Id" />*@
+                    @*<input type="hidden" value="@Model.PasswordHash" name="PasswordHash" />
+                        <input type="hidden" value="@Model.AuthenticatorKey" name="AuthenticatorKey" />
+                        <input type="hidden" value="@Model.NormalizedEmail" name="NormalizedEmail" />
+                        <input type="hidden" value="@Model.NormalizedUserName" name="NormalizedUserName" />
+                        <input type="hidden" value="@Model.UserName" name="UserName" />
+                        <input type="hidden" value="@Model.Email" name="Email" />
+                        <input type="hidden" value="@Model.Fname" name="Fname" />
+                        <input type="hidden" value="@Model.Lname" name="Lname" />
+                        <input type="hidden" value="@Model.PhoneNumber" name="PhoneNumber" />
+                        <input type="hidden" value="@Model.SecurityStamp" name="SecurityStamp" />
+                        <input type="hidden" value="@Model.Roles.ToArray()" name="Roles" />
+                        <input type="hidden" value="@Model.Programmes" name="Programmes" />*@
+
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <input type="submit" id="savechangesExam" value="Save Changes" class="btn btn-primary btn-outline-primary" />
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </div>
+
+</section>
+
+<section>
+    <div class="row" style="padding-top:3em;">
+        <div class="col-12">
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

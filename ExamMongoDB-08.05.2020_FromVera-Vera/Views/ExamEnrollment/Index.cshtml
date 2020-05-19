@@ -1,0 +1,74 @@
+﻿@using ExamMongoDB.Views.Manage;
+@inject UserManager<Student> _userManager;
+@inject SignInManager<Student> _signInManager;
+
+@using ExamMongoDB.Identity;
+@using Microsoft.AspNetCore.Identity;
+@*@model ExamMongoDB.ViewModels.ExamEnrollmentViewModel*@
+@model ExamMongoDB.ViewModels.ExamEnrollmentViewModel
+
+@using ExamMongoDB.Models.Repositories;
+
+@{
+    ViewData["Title"] = "ExamEnrollment";
+    ViewData.AddActivePage(ManageNavPages.Index);
+}
+
+@{
+
+    var user = await _userManager.GetUserAsync(User);
+}
+
+
+@*@Html.Partial("_StatusMessage", Model.StatusMessage)*@
+
+<link rel="stylesheet" href="~/css/student_logged_in.css" />
+
+<h2>My Exams and Marks</h2>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="home" role="tabpanel">
+        <table class="table table-borderless table-hover table-striped text-left">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SubjectCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoomId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Mark)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.ExamDate)
+                    </th>*@
+
+                </tr>
+            </thead>
+            <tbody >
+                @foreach (var model in user.ExamEnrollment)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelitem => model.SubjectCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem => model.RoomId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem => model.Mark)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelitem => model.ExamDate)
+                    </td>*@
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

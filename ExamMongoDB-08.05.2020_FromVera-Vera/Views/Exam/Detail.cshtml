@@ -1,0 +1,71 @@
+﻿@model ExamMongoDB.Models.Exam
+@using ExamMongoDB.Views.Manage;
+@inject UserManager<Student> _userManager;
+@inject SignInManager<Student> _signInManager;
+
+@using ExamMongoDB.Identity;
+@using Microsoft.AspNetCore.Identity;
+@using ExamMongoDB.Models.Repositories;
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>Exam</h4>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idExam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idExam)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgrammeCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProgrammeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExamDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ExamDate)
+        </dd>
+
+    </dl>
+
+
+
+
+</div>
+<div>
+
+    <form method="post" action="/exam/enroll">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="idExam" value="@Model.idExam" />
+        @*<input type="hidden" name="SubjectName" value="@Model.SubjectName" />
+        <input type="hidden" name="ExamDate" value="@Model.ExamDate" />*@
+        <input type="hidden" name="userName" value="@_userManager.GetUserId(User)" />
+        <input type="hidden" name="ProgrammeCode" value="@Model.ProgrammeCode" />
+        <input type="submit" @*class="btn btn-danger"*@ value="Enroll Exam" />
+    </form>
+
+
+
+    <a asp-action="Index" class="btn btn-outline-info">Back to List</a>
+</div>
+

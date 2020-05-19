@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ExamMongoDB.Identity.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <link rel="stylesheet" href="~/css/admin_logged_in.css" />
+
+    <div class="text-center mb-5">
+
+        @*<h2 class="display-4">Exam Automation System Users</h2>*@
+        <h2>Exam Automation System Users</h2>
+    </div>
+
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home">Users</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="home" role="tabpanel">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+
+                    @*Edited by Tareq*@
+
+                </tr>
+            </thead>
+            <tbody>
+             
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+
+
+                        <td>
+                            @*<a href="/user/edit/@item.UserName" class="btn btn-sm btn-outline-primary">Edit</a>*@
+
+                            <a href="/user/edit/@item.UserName" class="btn btn-sm btn-outline-primary" > 
+                            <img src="https://www.pngfind.com/pngs/m/70-704184_png-file-svg-pencil-edit-icon-png-transparent.png" width="30" height="30" />
+                                 </a>
+
+
+                          
+                        </td>
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
