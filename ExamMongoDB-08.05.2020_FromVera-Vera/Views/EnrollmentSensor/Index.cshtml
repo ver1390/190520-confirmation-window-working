@@ -16,7 +16,7 @@
 </div>
 
 
-<div class="card mb-3" style="max-width: 720px;">
+@*<div class="card mb-3" style="max-width: 720px;">
     <div class="row " style="margin-left:10px;">
         <div class="col-md-4 card-body">
             <h5 class="card-title">Username</h5>
@@ -93,7 +93,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
 @foreach (var item in Model)
@@ -115,7 +115,7 @@
                 <h5 class="card-text">Exams enrolled to:</h5>
                 <h6 class="card-subtitle mb-2 text-muted">  @item.ExamEnrollment.ToArray().Length</h6>
 
-                <a href="/EnrollmentSensor/Edit/@item.UserName" class="btn btn-primary btn-outline-primary" id="ee">Edit Enrollment</a>
+                <a href="/EnrollmentSensor/Edit/@item.UserName" class="btn btn-primary btn-outline-primary" id="ee">Edit Marks</a>
 
 
             </div>

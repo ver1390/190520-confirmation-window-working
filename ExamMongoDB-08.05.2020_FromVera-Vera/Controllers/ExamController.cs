@@ -167,7 +167,7 @@ namespace ExamMongoDB.Controllers
                     {
                         //return Window.Confirm(); install package
                         //MessageBox.Show
-                        StatusMessage = " You are already registered to the selected exam.";
+                        StatusMessage = " You are already previously enrolled to the selected exam.";
                         flag_already_reg = 1;
                     }
                         
@@ -204,7 +204,7 @@ namespace ExamMongoDB.Controllers
                                                    //potential solution: await _EntityDomainManager<TData>.InsertAsync(u);
                                                    //public override System.Threading.Tasks.Task<TData> InsertAsync (TData data);
 
-                StatusMessage = "Your exam is registered.";
+                StatusMessage = "You are now enrolled to the exam.";
                 flag_already_reg = 0;
             }
             return Redirect("/Exam");

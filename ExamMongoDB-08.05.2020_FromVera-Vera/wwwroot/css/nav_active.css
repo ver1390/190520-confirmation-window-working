@@ -1,7 +1,11 @@
 ﻿
 
-    .nav .current{
+    /*.nav .current{
     background-color:red;
 
-    }
+    }*/
+
+.active {
+    background-color: red;
+}
 

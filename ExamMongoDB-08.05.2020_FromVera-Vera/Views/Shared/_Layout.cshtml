@@ -6,6 +6,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript">
+
+       $(document).ready(function() {
+    $('ul.nav.navbar-nav').find('a[href="' + location.pathname + '"]')
+        .closest('li').addClass('active');
+});
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Exam Automation System</title>

@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="~/css/admin_logged_in.css" />
 
-    <h2>List of All Exams Admin View</h2>
+    <h2>List of All Exams </h2>
 @if (@User.Identity.IsAuthenticated == true)
 {
 
@@ -25,7 +25,7 @@
                 <th>Subject Code</th>
                
                 @*@_userManager.Users*@
-                Since you are logged in as      @User.Identity.Name, you have access to the list of all the exams in all the different programmes.
+                Since you are logged in as     @User.Identity.Name, you have access to the list of all the exams in all the different programmes.
 
                 @*@User.Identity.IsAuthenticated*@
 

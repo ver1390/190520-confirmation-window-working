@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ExamMongoDB.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ExamMongoDB.Controllers
 {
@@ -33,5 +34,7 @@ namespace ExamMongoDB.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+       
     }
 }

@@ -189,6 +189,8 @@ namespace ExamMongoDB.Controllers
             }
 
             var model = new SetPasswordViewModel { StatusMessage = StatusMessage };
+
+            StatusMessage = "Your password has been updated.";
             return View(model);
         }
 
