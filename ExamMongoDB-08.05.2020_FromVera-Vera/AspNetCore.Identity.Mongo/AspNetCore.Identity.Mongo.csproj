@@ -40,7 +40,7 @@ Thanks to GitHub users: vova3211 haseeb200 for their contributions</PackageRelea
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.3" />
-    <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
   </ItemGroup>
 
 </Project>
